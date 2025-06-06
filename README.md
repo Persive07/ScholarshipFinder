@@ -68,7 +68,7 @@ scholarship-finder/
 │ │ ├── recommendation.py     # Matching algorithm logic  
 │ │ └── server.py              
 │ ├── scrapers/  
-│ │ └── scholarships_com.py 
+│ │ └── scholarships_com.py   
 │ ├── requirements.txt    
 │ └── Dockerfile   
 ├── frontend/  
