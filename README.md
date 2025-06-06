@@ -53,7 +53,7 @@ Visit our deployed application:  [https://scholarshipfinderfrontend.onrender.com
 
 ## 📋 Prerequisites
 
-- Docker and Docker Compose (**if using Docker**)
+- Docker and Docker Compose 
 - MongoDB Atlas account (if using your own database)
 
 ---
