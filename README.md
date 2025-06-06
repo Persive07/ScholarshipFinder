@@ -95,13 +95,10 @@ cd ScholarshipFinder
 
 Create `backend/.env`:
 
-MONGODB_URI=your_mongodb_connection_string  
-DATABASE_NAME=your_database_name
+MONGODB_URI= 
+DATABASE_NAME=
 
 ( Or you could user our cluster for already scrapped data, but with very minimal database access )
-
-MONGODB_URI=mongodb+srv://developer:developer@cluster0.so1qg5r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0  
-DATABASE_NAME=scholarship_db
 
 Create `frontend/.env`:
 
@@ -154,7 +151,7 @@ To add new scholarship sources:
 1. Create a new scraper file in `backend/scrapers/`
 2. Follow the existing pattern in `scholarships.py`
 3. Ensure data consistency with the scholarship schema
-4. Test thoroughly before deployment
+4. Run the python script while in the backend
 
 ### API Endpoints
 
