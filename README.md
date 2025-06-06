@@ -45,7 +45,7 @@ Visit our application:  [https://scholarshipfinderfrontend.onrender.com](https:/
 
 ### Additional Technologies
 - **Sentiment Analysis:** VADER sentiment analyzer
-- **Web Scraping:** BeautifulSoup for scholarship platforms
+- **Web Scraping:** BeautifulSoup
 - **Containerization:** Docker
 - **Deployment:** Render.com
 
@@ -61,14 +61,14 @@ Visit our application:  [https://scholarshipfinderfrontend.onrender.com](https:/
 
 ## 📁 Project Structure
 
-scholarship-finder/   
+ScholarshipFinder/   
 ├── backend/   
 │ ├── src/  
 │ │ ├── dal.py                # Data access layer and DB logic  
 │ │ ├── recommendation.py     # Matching algorithm logic  
 │ │ └── server.py              
 │ ├── scrapers/  
-│ │ └── scholarships_com.py   
+│ │ └── scholarships.py   
 │ ├── requirements.txt    
 │ └── Dockerfile   
 ├── frontend/  
@@ -89,14 +89,14 @@ scholarship-finder/
 
 1. **Clone the repository**
 
-git clone https://github.com/Persive07/ScholarshipFindergit
+git clone https://github.com/Persive07/ScholarshipFindergit  
 cd ScholarshipFinder
 
 2. **Create environment files**
 
 Create `backend/.env`:
 
-MONGODB_URI=your_mongodb_connection_string
+MONGODB_URI=your_mongodb_connection_string  
 DATABASE_NAME=your_database_name
 
 ( Or you could user our cluster for already scrapped data, but with very minimal database access )
@@ -110,7 +110,7 @@ REACT_APP_API_URL=http://localhost:8000
 
 3. **Build and start the application**
 
-docker compose build
+docker compose build  
 docker compose up -d
 
 4. **Access the application**
@@ -147,7 +147,7 @@ cd backend
 
 2. Create and activate a virtual environment:
 
-python -m venv venv
+python -m venv venv  
 source venv/bin/activate # On Windows: venv\Scripts\activate
 
 3. Install Python dependencies:
@@ -166,7 +166,7 @@ python src/server.py
 
 Our intelligent matching system evaluates scholarships based on multiple criteria:
 
-1. **Eligibility Check:** Verifies if the user meets basic requirements (GPA, major, location, etc.)
+1. **Eligibility Check:** Verifies if the user meets basic requirements (GPA, major, age, SAT score, etc.)
 2. **Deadline Validation:** Filters out expired scholarships and prioritizes urgent deadlines
 3. **Relevance Scoring:** Assigns scores based on grant amount and scholarship type
 4. **Interest Matching:** Compares user interests with scholarship focus areas
@@ -191,7 +191,7 @@ _Credit to Scholarships.com for allowing us to use their data for educational pu
 To add new scholarship sources:
 
 1. Create a new scraper file in `backend/scrapers/`
-2. Follow the existing pattern in `scholarships_com.py`
+2. Follow the existing pattern in `scholarships.py`
 3. Ensure data consistency with the scholarship schema
 4. Test thoroughly before deployment
 
