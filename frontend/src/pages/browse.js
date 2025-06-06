@@ -23,7 +23,7 @@ import {
   ListItemText,
   Container,
   Fade,
-  TextField,
+  TextField
 } from '@mui/material';
 import { 
   CalendarMonth, 
@@ -41,9 +41,7 @@ import {
   Person,
   Business,
   Grade,
-  Assessment,
-  Wc,
-  Sort
+  Assessment
 } from '@mui/icons-material';
 import { format } from 'date-fns';
 import { styled } from '@mui/material/styles';
@@ -188,7 +186,7 @@ const Browse = ({ user }) => {
       if (filters.financial_needs.length)
         filters.financial_needs.forEach(f => params.append('financial_needs', f));
       
-      const response = await fetch(`{apiBaseUrl}/scholarships/search?${params.toString()}`);
+      const response = await fetch(`${apiBaseUrl}/scholarships/search?${params.toString()}`);
       if (!response.ok) throw new Error('Failed to fetch scholarships');
       const data = await response.json();
       setScholarships(data);
@@ -595,422 +593,284 @@ const Browse = ({ user }) => {
           </Typography>
         </CompactHeader>
 
-{/* Enhanced Filters Section */}
-<FilterCard elevation={0}>
-  <Stack spacing={4}>
-    {/* Header Section with Better Visual Hierarchy - Centered */}
-<Stack direction="row" alignItems="center" justifyContent="center" sx={{ position: 'relative' }}>
-  <Stack direction="row" alignItems="center" spacing={3}>
-    <Box
-      sx={{
-        p: 2,
-        borderRadius: 3,
-        background: 'linear-gradient(45deg, #667eea 30%, #764ba2 90%)',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
-      <TuneRounded sx={{ fontSize: 32 }} />
-    </Box>
-    <Box>
-      <Typography variant="h4" sx={{ fontWeight: 800, color: 'primary.main', mb: 0.5 }}>
-        Smart Filters
-      </Typography>
-      <Typography variant="body1" sx={{ color: 'text.secondary' }}>
-        Refine your scholarship search with advanced filters
-      </Typography>
-    </Box>
-    {getActiveFilterCount() > 0 && (
-      <Chip
-        label={`${getActiveFilterCount()} active filters`}
-        color="primary"
-        variant="filled"
-        sx={{
-          fontWeight: 600,
-          fontSize: '0.9rem',
-          background: 'linear-gradient(45deg, #1976d2 30%, #42a5f5 90%)',
-          boxShadow: '0 4px 12px rgba(25, 118, 210, 0.3)'
-        }}
-      />
-    )}
-  </Stack>
-  
-  {/* Clear button positioned absolutely to the right */}
-  {getActiveFilterCount() > 0 && (
-    <Button
-      startIcon={<Clear />}
-      onClick={clearFilters}
-      variant="outlined"
-      color="error"
-      sx={{ 
-        position: 'absolute',
-        right: 0,
-        borderRadius: 3,
-        textTransform: 'none',
-        fontWeight: 600,
-        px: 3,
-        py: 1,
-        borderWidth: 2,
-        '&:hover': {
-          borderWidth: 2,
-          background: 'rgba(244, 67, 54, 0.05)'
-        }
-      }}
-    >
-      Clear All Filters
-    </Button>
-  )}
-
-
-    
-    </Stack>
-
-    <Divider sx={{ borderColor: 'rgba(25, 118, 210, 0.1)' }} />
-
-    {/* Enhanced Filter Grid with Better Organization */}
-<Box>
-  <Grid container spacing={3} justifyContent="center">
-    {/* Academic Filters Section - Centered */}
-    <Grid item xs={12} md={10} lg={8}>
-      <Paper 
-        elevation={1} 
-        sx={{ 
-          p: 3, 
-          borderRadius: 2, 
-          background: 'linear-gradient(135deg, rgba(25, 118, 210, 0.02) 0%, rgba(66, 165, 245, 0.02) 100%)',
-          border: '1px solid rgba(25, 118, 210, 0.1)'
-        }}
-      >
-        <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'primary.main', mb: 2, textAlign: 'center' }}>
-          Academic Criteria
-        </Typography>
-        <Grid container spacing={2} justifyContent="center">
-          <Grid item xs={12} md={4}>
-            <Stack spacing={1}>
-              <Typography variant="body2" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', color: 'text.primary', justifyContent: 'center' }}>
-                <School sx={{ mr: 1, color: 'primary.main', fontSize: 20 }} />
-                Academic Major
-              </Typography>
-              <StyledFormControl fullWidth size="small">
-                <InputLabel>Select Majors</InputLabel>
-                <Select
-                  multiple
-                  value={filters.academic_majors}
-                  onChange={handleFilterChange('academic_majors')}
-                  renderValue={(selected) => 
-                    selected.length > 0 ? `${selected.length} major${selected.length > 1 ? 's' : ''} selected` : 'Select majors'
-                  }
-                >
-                  {AcademicMajor.map(major => (
-                    <MenuItem key={major} value={major}>
-                      <Checkbox checked={filters.academic_majors.includes(major)} />
-                      <Typography variant="body2">{major}</Typography>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </StyledFormControl>
-            </Stack>
-          </Grid>
-
-          <Grid item xs={12} md={2}>
-            <Stack spacing={1}>
-              <Typography variant="body2" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', color: 'text.primary', justifyContent: 'center' }}>
-                <Grade sx={{ mr: 1, color: 'primary.main', fontSize: 20 }} />
-                GPA Range
-              </Typography>
-              <Stack direction="row" spacing={1}>
-                <TextField
-                  size="small"
-                  label="Min"
-                  type="number"
-                  inputProps={{ min: 0, max: 4, step: 0.1 }}
-                  value={filters.min_gpa}
-                  onChange={(e) => setFilters(prev => ({ ...prev, min_gpa: e.target.value }))}
-                  onKeyPress={handleKeyPress}
-                  sx={{ flex: 1 }}
-                />
-                <TextField
-                  size="small"
-                  label="Max"
-                  type="number"
-                  inputProps={{ min: 0, max: 4, step: 0.1 }}
-                  value={filters.max_gpa}
-                  onChange={(e) => setFilters(prev => ({ ...prev, max_gpa: e.target.value }))}
-                  onKeyPress={handleKeyPress}
-                  sx={{ flex: 1 }}
-                />
+        <FilterCard elevation={0}>
+          <Stack spacing={3}>
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+              <Stack direction="row" alignItems="center" spacing={2}>
+                <TuneRounded sx={{ color: 'primary.main', fontSize: 28 }} />
+                <Typography variant="h5" sx={{ fontWeight: 700, color: 'primary.main' }}>
+                  Smart Filters
+                </Typography>
+                {getActiveFilterCount() > 0 && (
+                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    ({getActiveFilterCount()} active)
+                  </Typography>
+                )}
               </Stack>
-            </Stack>
-          </Grid>
-
-          <Grid item xs={12} md={2}>
-            <Stack spacing={1}>
-              <Typography variant="body2" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', color: 'text.primary', justifyContent: 'center' }}>
-                <Assessment sx={{ mr: 1, color: 'primary.main', fontSize: 20 }} />
-                SAT Range
-              </Typography>
-              <Stack direction="row" spacing={1}>
-                <TextField
-                  size="small"
-                  label="Min"
-                  type="number"
-                  inputProps={{ min: 0, max: 1600, step: 10 }}
-                  value={filters.min_sat}
-                  onChange={(e) => setFilters(prev => ({ ...prev, min_sat: e.target.value }))}
-                  onKeyPress={handleKeyPress}
-                  sx={{ flex: 1 }}
-                />
-                <TextField
-                  size="small"
-                  label="Max"
-                  type="number"
-                  inputProps={{ min: 0, max: 1600, step: 10 }}
-                  value={filters.max_sat}
-                  onChange={(e) => setFilters(prev => ({ ...prev, max_sat: e.target.value }))}
-                  onKeyPress={handleKeyPress}
-                  sx={{ flex: 1 }}
-                />
-              </Stack>
-            </Stack>
-          </Grid>
-
-          <Grid item xs={12} md={2}>
-            <Stack spacing={1}>
-              <Typography variant="body2" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', color: 'text.primary', justifyContent: 'center' }}>
-                <AttachMoney sx={{ mr: 1, color: 'primary.main', fontSize: 20 }} />
-                Amount Range
-              </Typography>
-              <Stack direction="row" spacing={1}>
-                <TextField
-                  size="small"
-                  label="Min $"
-                  type="number"
-                  value={filters.min_amount}
-                  onChange={(e) => setFilters(prev => ({ ...prev, min_amount: e.target.value }))}
-                  onKeyPress={handleKeyPress}
-                  sx={{ flex: 1 }}
-                />
-                <TextField
-                  size="small"
-                  label="Max $"
-                  type="number"
-                  value={filters.max_amount}
-                  onChange={(e) => setFilters(prev => ({ ...prev, max_amount: e.target.value }))}
-                  onKeyPress={handleKeyPress}
-                  sx={{ flex: 1 }}
-                />
-              </Stack>
-            </Stack>
-          </Grid>
-
-          <Grid item xs={12} md={2}>
-            <Stack spacing={1}>
-              <Typography variant="body2" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', color: 'text.primary', justifyContent: 'center' }}>
-                <AccessTime sx={{ mr: 1, color: 'primary.main', fontSize: 20 }} />
-                Deadline
-              </Typography>
-              <StyledFormControl fullWidth size="small">
-                <InputLabel>Select Range</InputLabel>
-                <Select
-                  value={filters.deadline_range}
-                  onChange={handleFilterChange('deadline_range')}
+              
+              {getActiveFilterCount() > 0 && (
+                <Button
+                  startIcon={<Clear />}
+                  onClick={clearFilters}
+                  variant="outlined"
+                  color="error"
+                  sx={{ 
+                    borderRadius: 3,
+                    textTransform: 'none',
+                    fontWeight: 600,
+                    px: 3
+                  }}
                 >
-                  <MenuItem value="all">All Deadlines</MenuItem>
-                  <MenuItem value="week">Within 1 Week</MenuItem>
-                  <MenuItem value="month">Within 1 Month</MenuItem>
-                  <MenuItem value="quarter">Within 3 Months</MenuItem>
-                </Select>
-              </StyledFormControl>
+                  Clear All Filters
+                </Button>
+              )}
             </Stack>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Grid>
 
-    {/* Personal Criteria Section - Centered */}
-    <Grid item xs={12} md={10} lg={8}>
-      <Paper 
-        elevation={1} 
-        sx={{ 
-          p: 3, 
-          borderRadius: 2, 
-          background: 'linear-gradient(135deg, rgba(76, 175, 80, 0.02) 0%, rgba(129, 199, 132, 0.02) 100%)',
-          border: '1px solid rgba(76, 175, 80, 0.1)'
-        }}
-      >
-        <Typography variant="subtitle1" sx={{ fontWeight: 700, color: 'success.main', mb: 2, textAlign: 'center' }}>
-          Personal Criteria
-        </Typography>
-        <Grid container spacing={2} justifyContent="center">
-          <Grid item xs={12} md={3}>
-            <Stack spacing={1}>
-              <Typography variant="body2" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', color: 'text.primary', justifyContent: 'center' }}>
-                <Person sx={{ mr: 1, color: 'success.main', fontSize: 20 }} />
-                Age Range
-              </Typography>
-              <StyledFormControl fullWidth size="small">
-                <InputLabel>Select Ages</InputLabel>
-                <Select
-                  multiple
-                  value={filters.age_ranges}
-                  onChange={handleFilterChange('age_ranges')}
-                  renderValue={(selected) => 
-                    selected.length > 0 ? `${selected.length} selected` : 'Select ages'
-                  }
-                >
-                  {AgeRange.map(age => (
-                    <MenuItem key={age} value={age}>
-                      <Checkbox checked={filters.age_ranges.includes(age)} />
-                      <Typography variant="body2">{age}</Typography>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </StyledFormControl>
-            </Stack>
-          </Grid>
+            <Divider />
 
-          <Grid item xs={12} md={3}>
-            <Stack spacing={1}>
-              <Typography variant="body2" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', color: 'text.primary', justifyContent: 'center' }}>
-                <Wc sx={{ mr: 1, color: 'success.main', fontSize: 20 }} />
-                Gender
-              </Typography>
-              <StyledFormControl fullWidth size="small">
-                <InputLabel>Select Gender</InputLabel>
-                <Select
-                  multiple
-                  value={filters.genders}
-                  onChange={handleFilterChange('genders')}
-                  renderValue={(selected) => 
-                    selected.length > 0 ? `${selected.length} selected` : 'Any gender'
-                  }
-                >
-                  {GenderOptions.map(gender => (
-                    <MenuItem key={gender} value={gender}>
-                      <Checkbox checked={filters.genders.includes(gender)} />
-                      <Typography variant="body2">{gender}</Typography>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </StyledFormControl>
-            </Stack>
-          </Grid>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={3}>
+                <Stack spacing={1}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}>
+                    <School sx={{ mr: 1, color: 'primary.main' }} />
+                    Academic Major
+                  </Typography>
+                  <StyledFormControl fullWidth size="small">
+                    <InputLabel>Select Majors</InputLabel>
+                    <Select
+                      multiple
+                      value={filters.academic_majors}
+                      onChange={handleFilterChange('academic_majors')}
+                      renderValue={(selected) => 
+                        selected.length > 0 ? `${selected.length} major${selected.length > 1 ? 's' : ''} selected` : 'Select majors'
+                      }
+                    >
+                      {AcademicMajor.map(major => (
+                        <MenuItem key={major} value={major}>
+                          <Checkbox checked={filters.academic_majors.includes(major)} />
+                          <Typography variant="body2">{major}</Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </StyledFormControl>
+                </Stack>
+              </Grid>
 
-          <Grid item xs={12} md={3}>
-            <Stack spacing={1}>
-              <Typography variant="body2" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', color: 'text.primary', justifyContent: 'center' }}>
-                <Business sx={{ mr: 1, color: 'success.main', fontSize: 20 }} />
-                Financial Need
-              </Typography>
-              <StyledFormControl fullWidth size="small">
-                <InputLabel>Select Need</InputLabel>
-                <Select
-                  multiple
-                  value={filters.financial_needs}
-                  onChange={handleFilterChange('financial_needs')}
-                  renderValue={(selected) => 
-                    selected.length > 0 ? `${selected.length} selected` : 'Any need'
-                  }
-                >
-                  {FinancialNeedOptions.map(need => (
-                    <MenuItem key={need} value={need}>
-                      <Checkbox checked={filters.financial_needs.includes(need)} />
-                      <Typography variant="body2">{need}</Typography>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </StyledFormControl>
-            </Stack>
-          </Grid>
+              <Grid item xs={12} md={2}>
+                <Stack spacing={1}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}>
+                    <Person sx={{ mr: 1, color: 'primary.main' }} />
+                    Age Range
+                  </Typography>
+                  <StyledFormControl fullWidth size="small">
+                    <InputLabel>Select Ages</InputLabel>
+                    <Select
+                      multiple
+                      value={filters.age_ranges}
+                      onChange={handleFilterChange('age_ranges')}
+                      renderValue={(selected) => 
+                        selected.length > 0 ? `${selected.length} selected` : 'Select ages'
+                      }
+                    >
+                      {AgeRange.map(age => (
+                        <MenuItem key={age} value={age}>
+                          <Checkbox checked={filters.age_ranges.includes(age)} />
+                          <Typography variant="body2">{age}</Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </StyledFormControl>
+                </Stack>
+              </Grid>
 
-          <Grid item xs={12} md={3}>
-            <Stack spacing={1}>
-              <Typography variant="body2" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', color: 'text.primary', justifyContent: 'center' }}>
-                <FilterList sx={{ mr: 1, color: 'success.main', fontSize: 20 }} />
-                Sort By
-              </Typography>
-              <StyledFormControl fullWidth size="small">
-                <InputLabel>Sort Options</InputLabel>
-                <Select 
-                  value={sortBy} 
-                  onChange={(e) => setSortBy(e.target.value)}
-                >
-                  <MenuItem value="amount">
-                    <Stack direction="row" alignItems="center" spacing={1}>
-                      <MonetizationOn sx={{ fontSize: 18, color: 'success.main' }} />
-                      <Typography>Highest Amount</Typography>
-                    </Stack>
-                  </MenuItem>
-                  <MenuItem value="deadline">
-                    <Stack direction="row" alignItems="center" spacing={1}>
-                      <AccessTime sx={{ fontSize: 18, color: 'info.main' }} />
-                      <Typography>Earliest Deadline</Typography>
-                    </Stack>
-                  </MenuItem>
-                  <MenuItem value="title">
-                    <Stack direction="row" alignItems="center" spacing={1}>
-                      <Sort sx={{ fontSize: 18, color: 'primary.main' }} />
-                      <Typography>Alphabetical</Typography>
-                    </Stack>
-                  </MenuItem>
-                </Select>
-              </StyledFormControl>
-            </Stack>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Grid>
-  </Grid>
-</Box>
+              <Grid item xs={12} md={2}>
+                <Stack spacing={1}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}>
+                    <Person sx={{ mr: 1, color: 'primary.main' }} />
+                    Gender
+                  </Typography>
+                  <StyledFormControl fullWidth size="small">
+                    <InputLabel>Select Gender</InputLabel>
+                    <Select
+                      multiple
+                      value={filters.genders}
+                      onChange={handleFilterChange('genders')}
+                      renderValue={(selected) => 
+                        selected.length > 0 ? `${selected.length} selected` : 'Any gender'
+                      }
+                    >
+                      {GenderOptions.map(gender => (
+                        <MenuItem key={gender} value={gender}>
+                          <Checkbox checked={filters.genders.includes(gender)} />
+                          <Typography variant="body2">{gender}</Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </StyledFormControl>
+                </Stack>
+              </Grid>
 
+              <Grid item xs={12} md={2}>
+                <Stack spacing={1}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}>
+                    <Business sx={{ mr: 1, color: 'primary.main' }} />
+                    Financial Need
+                  </Typography>
+                  <StyledFormControl fullWidth size="small">
+                    <InputLabel>Select Need</InputLabel>
+                    <Select
+                      multiple
+                      value={filters.financial_needs}
+                      onChange={handleFilterChange('financial_needs')}
+                      renderValue={(selected) => 
+                        selected.length > 0 ? `${selected.length} selected` : 'Any need'
+                      }
+                    >
+                      {FinancialNeedOptions.map(need => (
+                        <MenuItem key={need} value={need}>
+                          <Checkbox checked={filters.financial_needs.includes(need)} />
+                          <Typography variant="body2">{need}</Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </StyledFormControl>
+                </Stack>
+              </Grid>
 
-    {/* Quick Filter Chips */}
-    {getActiveFilterCount() > 0 && (
-      <Box>
-        <Typography variant="body2" sx={{ fontWeight: 600, color: 'text.secondary', mb: 1 }}>
-          Active Filters:
-        </Typography>
-        <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 1 }}>
-          {filters.academic_majors.map(major => (
-            <Chip
-              key={major}
-              label={major}
-              onDelete={() => setFilters(prev => ({
-                ...prev,
-                academic_majors: prev.academic_majors.filter(m => m !== major)
-              }))}
-              size="small"
-              color="primary"
-              variant="outlined"
-            />
-          ))}
-          {filters.min_amount && (
-            <Chip
-              label={`Min: $${filters.min_amount}`}
-              onDelete={() => setFilters(prev => ({ ...prev, min_amount: '' }))}
-              size="small"
-              color="success"
-              variant="outlined"
-            />
-          )}
-          {filters.max_amount && (
-            <Chip
-              label={`Max: $${filters.max_amount}`}
-              onDelete={() => setFilters(prev => ({ ...prev, max_amount: '' }))}
-              size="small"
-              color="success"
-              variant="outlined"
-            />
-          )}
-          {/* Add more filter chips as needed */}
-        </Stack>
-      </Box>
-    )}
-  </Stack>
-</FilterCard>
+              <Grid item xs={12} md={3}>
+                <Stack spacing={1}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}>
+                    <AccessTime sx={{ mr: 1, color: 'primary.main' }} />
+                    Deadline
+                  </Typography>
+                  <StyledFormControl fullWidth size="small">
+                    <InputLabel>Select Range</InputLabel>
+                    <Select
+                      value={filters.deadline_range}
+                      onChange={handleFilterChange('deadline_range')}
+                    >
+                      <MenuItem value="all">All Deadlines</MenuItem>
+                      <MenuItem value="week">Within 1 Week</MenuItem>
+                      <MenuItem value="month">Within 1 Month</MenuItem>
+                      <MenuItem value="quarter">Within 3 Months</MenuItem>
+                    </Select>
+                  </StyledFormControl>
+                </Stack>
+              </Grid>
 
+              <Grid item xs={12} md={2}>
+                <Stack spacing={1}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}>
+                    <FilterList sx={{ mr: 1, color: 'primary.main' }} />
+                    Sort By
+                  </Typography>
+                  <StyledFormControl fullWidth size="small">
+                    <InputLabel>Sort Options</InputLabel>
+                    <Select 
+                      value={sortBy} 
+                      onChange={(e) => setSortBy(e.target.value)}
+                    >
+                      <MenuItem value="amount">💰 Highest Amount</MenuItem>
+                      <MenuItem value="deadline">📅 Earliest Deadline</MenuItem>
+                      <MenuItem value="title">📝 Alphabetical</MenuItem>
+                    </Select>
+                  </StyledFormControl>
+                </Stack>
+              </Grid>
+
+              <Grid item xs={12} md={2}>
+                <Stack spacing={1}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}>
+                    <AttachMoney sx={{ mr: 1, color: 'primary.main' }} />
+                    Amount Range
+                  </Typography>
+                  <Stack direction="row" spacing={1}>
+                    <TextField
+                      size="small"
+                      label="Min $"
+                      type="number"
+                      value={filters.min_amount}
+                      onChange={(e) => setFilters(prev => ({ ...prev, min_amount: e.target.value }))}
+                      onKeyPress={handleKeyPress}
+                      sx={{ flex: 1 }}
+                    />
+                    <TextField
+                      size="small"
+                      label="Max $"
+                      type="number"
+                      value={filters.max_amount}
+                      onChange={(e) => setFilters(prev => ({ ...prev, max_amount: e.target.value }))}
+                      onKeyPress={handleKeyPress}
+                      sx={{ flex: 1 }}
+                    />
+                  </Stack>
+                </Stack>
+              </Grid>
+
+              <Grid item xs={12} md={2}>
+                <Stack spacing={1}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}>
+                    <Grade sx={{ mr: 1, color: 'primary.main' }} />
+                    GPA Range
+                  </Typography>
+                  <Stack direction="row" spacing={1}>
+                    <TextField
+                      size="small"
+                      label="Min GPA"
+                      type="number"
+                      inputProps={{ min: 0, max: 4, step: 0.1 }}
+                      value={filters.min_gpa}
+                      onChange={(e) => setFilters(prev => ({ ...prev, min_gpa: e.target.value }))}
+                      onKeyPress={handleKeyPress}
+                      sx={{ flex: 1 }}
+                    />
+                    <TextField
+                      size="small"
+                      label="Max GPA"
+                      type="number"
+                      inputProps={{ min: 0, max: 4, step: 0.1 }}
+                      value={filters.max_gpa}
+                      onChange={(e) => setFilters(prev => ({ ...prev, max_gpa: e.target.value }))}
+                      onKeyPress={handleKeyPress}
+                      sx={{ flex: 1 }}
+                    />
+                  </Stack>
+                </Stack>
+              </Grid>
+
+              <Grid item xs={12} md={2}>
+                <Stack spacing={1}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}>
+                    <Assessment sx={{ mr: 1, color: 'primary.main' }} />
+                    SAT Score Range
+                  </Typography>
+                  <Stack direction="row" spacing={1}>
+                    <TextField
+                      size="small"
+                      label="Min SAT"
+                      type="number"
+                      inputProps={{ min: 0, max: 1600, step: 10 }}
+                      value={filters.min_sat}
+                      onChange={(e) => setFilters(prev => ({ ...prev, min_sat: e.target.value }))}
+                      onKeyPress={handleKeyPress}
+                      sx={{ flex: 1 }}
+                    />
+                    <TextField
+                      size="small"
+                      label="Max SAT"
+                      type="number"
+                      inputProps={{ min: 0, max: 1600, step: 10 }}
+                      value={filters.max_sat}
+                      onChange={(e) => setFilters(prev => ({ ...prev, max_sat: e.target.value }))}
+                      onKeyPress={handleKeyPress}
+                      sx={{ flex: 1 }}
+                    />
+                  </Stack>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Stack>
+        </FilterCard>
 
         <Paper
           elevation={3}
