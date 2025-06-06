@@ -47,7 +47,7 @@ import {
 } from '@mui/icons-material';
 import { format } from 'date-fns';
 import { styled } from '@mui/material/styles';
-
+const apiBaseUrl = process.env.REACT_APP_API_URL;
 // Define enums as JS arrays
 const AcademicMajor = [
   "Aerospace Technologies and Engineering", "Art", "Business Management", "Chemical Engineering",
@@ -188,7 +188,7 @@ const Browse = ({ user }) => {
       if (filters.financial_needs.length)
         filters.financial_needs.forEach(f => params.append('financial_needs', f));
       
-      const response = await fetch(`http://localhost:8000/scholarships/search?${params.toString()}`);
+      const response = await fetch(`{apiBaseUrl}/scholarships/search?${params.toString()}`);
       if (!response.ok) throw new Error('Failed to fetch scholarships');
       const data = await response.json();
       setScholarships(data);
