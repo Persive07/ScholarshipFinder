@@ -54,7 +54,6 @@ Visit our deployed application:  [https://scholarshipfinderfrontend.onrender.com
 ## 📋 Prerequisites
 
 - Docker and Docker Compose (**if using Docker**)
-- Python 3.8+ (if running backend without Docker)
 - MongoDB Atlas account (if using your own database)
 
 ---
@@ -85,7 +84,7 @@ ScholarshipFinder/
 
 ## 🛠️ Installation & Setup
 
-### Option 1: Using Docker (Recommended)
+### Using Docker 
 
 1. **Clone the repository**
 
@@ -118,47 +117,9 @@ docker compose up -d
 - Backend API: [http://localhost:8000](http://localhost:8000)
 - API Documentation: [http://localhost:8000/docs](http://localhost:8000/docs)
 
----
+5. **Stopping the application**
 
-### Option 2: Without Docker
-
-#### Frontend Setup
-
-1. Navigate to the frontend directory:
-
-cd frontend
-
-2. Install dependencies:
-
-npm install
-
-3. Create `.env` file:
-
-4. Start the development server:
-
-npm start
-
-
-#### Backend Setup
-
-1. Navigate to the backend directory:
-
-cd backend
-
-2. Create and activate a virtual environment:
-
-python -m venv venv  
-source venv/bin/activate # On Windows: venv\Scripts\activate
-
-3. Install Python dependencies:
-
-pip install -r requirements.txt 
-
-4. Create `.env` file:
-
-5. Start the FastAPI server:
-
-python src/server.py
+docker compose down
 
 ---
 
