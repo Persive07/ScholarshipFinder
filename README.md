@@ -2,17 +2,24 @@
 
 A comprehensive scholarship matching platform that helps students find relevant educational funding opportunities based on their academic profile, interests, and eligibility criteria.
 
+## 🚀 Live Demo
+
+Visit our application:  [https://scholarshipfinderfrontend.onrender.com](https://scholarshipfinderfrontend.onrender.com) ( deployed on render )
+
 ---
 
-## 🎯 Problem Statement
+## 👥 Developed By
 
-Our Scholarship Finder tool scrapes available scholarships from various educational portals, government websites, and scholarship platforms. The tool matches scholarships to students based on their personal profiles such as course, grades, location, and interests, helping students find the most relevant opportunities automatically and making it easier for them to apply for scholarships.
+- Mahaswin
+- Cherish
+- Srivardhan
+- Pranav Deshmukh
 
 ---
 
 ## 🌟 Features
 
-- **Student Profile System**: Comprehensive input fields for course of study, GPA/grades, location, and optional criteria like income status.
+- **Student Profile System**: Comprehensive input fields for course of study, GPA/grades, SAT score, interests, etc.
 - **Intelligent Matching Algorithm**: Multi-factor matching system considering:
   - Eligibility requirements
   - Deadline urgency
@@ -21,8 +28,6 @@ Our Scholarship Finder tool scrapes available scholarships from various educatio
   - Sentiment analysis on scholarship descriptions
 - **Web Scraping**: Automated collection of scholarship data from major platforms (currently Scholarships.com; more coming soon)
 - **User Authentication**: Secure login and profile management
-- **Personalized Recommendations**: Tailored scholarship lists ranked by relevance
-- **Real-time Updates**: Current scholarship information with deadline tracking
 
 ---
 
@@ -34,32 +39,21 @@ Our Scholarship Finder tool scrapes available scholarships from various educatio
 
 ### Backend
 - **Framework:** FastAPI (Python)
-- **Authentication:** Custom user management system
-- **API:** RESTful endpoints for user and scholarship management
 
 ### Database
 - **Database:** MongoDB Atlas (Cloud)
-- **ODM:** Motor (Async MongoDB driver)
 
 ### Additional Technologies
 - **Sentiment Analysis:** VADER sentiment analyzer
-- **Web Scraping:** Custom scrapers for scholarship platforms
-- **Containerization:** Docker & Docker Compose
+- **Web Scraping:** BeautifulSoup for scholarship platforms
+- **Containerization:** Docker
 - **Deployment:** Render.com
-
----
-
-## 🚀 Live Demo
-
-Visit our deployed application:  
-[https://scholarshipfinderfrontend.onrender.com](https://scholarshipfinderfrontend.onrender.com)
 
 ---
 
 ## 📋 Prerequisites
 
 - Docker and Docker Compose (**if using Docker**)
-- Node.js (if running frontend without Docker)
 - Python 3.8+ (if running backend without Docker)
 - MongoDB Atlas account (if using your own database)
 
@@ -75,52 +69,19 @@ scholarship-finder/
 │ │ └── server.py # FastAPI application entrypoint  
 │ ├── scrapers/  
 │ │ └── scholarships_com.py # Web scraper for Scholarships.com  
-│ ├── requirements.txt # Python dependencies  
-│ ├── .env.example # Example backend environment variables  
+│ ├── requirements.txt # Python dependencies    
 │ └── Dockerfile # Backend Docker configuration  
 ├── frontend/  
-│ ├── public/ # React public assets  
 │ ├── src/  
-│ │ ├── components/ # React components  
-│ │ ├── App.js # Main React app  
-│ │ └── index.js # React entrypoint  
-│ ├── package.json # Node.js dependencies and scripts  
-│ ├── .env.example # Example frontend environment variables  
+│ │ ├── pages/ # React components  
+│ │ ├── App.js # Main React app   
+│ ├── package.json # Node.js dependencies and scripts   
 │ └── Dockerfile # Frontend Docker configuration  
 ├── compose.yaml # Docker Compose orchestration file  
-├── README.md # Project documentation  
-└── .gitignore # Git ignore rules  
-
-
-### Explanation
-
-- **backend/**  
-  FastAPI backend code, database logic, and web scrapers.
-  - `src/`: Main backend logic, API, and matching algorithm.
-  - `scrapers/`: Scripts for scraping scholarship data.
-  - `requirements.txt`: Python dependencies.
-  - `.env.example`: Example environment variables for backend.
-  - `Dockerfile`: Backend Docker configuration.
-
-- **frontend/**  
-  React frontend code and assets.
-  - `public/`, `src/`: Standard React structure.
-  - `package.json`: Node.js dependencies and scripts.
-  - `.env.example`: Example environment variables for frontend.
-  - `Dockerfile`: Frontend Docker configuration.
-
-- **compose.yaml**  
-  Docker Compose file to orchestrate frontend and backend containers.
-
-- **README.md**  
-  Project documentation.
-
-- **.gitignore**  
-  Specifies files/folders to exclude from version control.
-
+├── README.md  
+└── .gitignore  
 
 ---
-
 
 ## 🛠️ Installation & Setup
 
@@ -128,28 +89,29 @@ scholarship-finder/
 
 1. **Clone the repository**
 
-git clone https://github.com/your-username/scholarship-finder.git
-cd scholarship-finder
-
+git clone https://github.com/Persive07/ScholarshipFindergit
+cd ScholarshipFinder
 
 2. **Create environment files**
 
 Create `backend/.env`:
 
-MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-address>/scholarship_db?retryWrites=true&w=majority
-DATABASE_NAME=scholarship_db
+MONGODB_URI=your_mongodb_connection_string
+DATABASE_NAME=your_database_name
 
+( Or you could user our cluster for already scrapped data, but with very minimal database access )
+
+MONGODB_URI=mongodb+srv://developer:developer@cluster0.so1qg5r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+DATABASE_NAME=scholarship_db
 
 Create `frontend/.env`:
 
 REACT_APP_API_URL=http://localhost:8000
 
-
 3. **Build and start the application**
 
 docker compose build
 docker compose up -d
-
 
 4. **Access the application**
 - Frontend: [http://localhost:3000](http://localhost:3000)
@@ -172,8 +134,6 @@ npm install
 
 3. Create `.env` file:
 
-REACT_APP_API_URL=http://localhost:8000
-
 4. Start the development server:
 
 npm start
@@ -192,21 +152,13 @@ source venv/bin/activate # On Windows: venv\Scripts\activate
 
 3. Install Python dependencies:
 
-pip install -r requirements.txt
+pip install -r requirements.txt 
 
 4. Create `.env` file:
-
-MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-address>/scholarship_db?retryWrites=true&w=majority
-DATABASE_NAME=scholarship_db
 
 5. Start the FastAPI server:
 
 python src/server.py
-
-
-The application will be available at:
-- Frontend: [http://localhost:3000](http://localhost:3000)
-- Backend API: [http://localhost:8000](http://localhost:8000)
 
 ---
 
@@ -309,15 +261,6 @@ The application is containerized and can be deployed on various platforms:
 ## 📄 License
 
 This project is for educational purposes. Please respect the terms of service of scraped websites.
-
----
-
-## 👥 Developed By
-
-- [Developer Name 1]
-- [Developer Name 2]
-- [Developer Name 3]
-- [Developer Name 4]
 
 ---
 
