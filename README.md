@@ -4,7 +4,7 @@ A comprehensive scholarship matching platform that helps students find relevant 
 
 ## 🚀 Live Demo
 
-Visit our application:  [https://scholarshipfinderfrontend.onrender.com](https://scholarshipfinderfrontend.onrender.com) ( deployed on render )
+Visit our deployed application:  [https://scholarshipfinderfrontend.onrender.com](https://scholarshipfinderfrontend.onrender.com) ( hosted on render )
 
 ---
 
