@@ -67,29 +67,29 @@ Visit our deployed application:
 
 ## 📁 Project Structure
 
-scholarship-finder/
-├── backend/
-│ ├── src/
-│ │ ├── dal.py # Data access layer and DB logic
-│ │ ├── recommendation.py # Matching algorithm logic
-│ │ └── server.py # FastAPI application entrypoint
-│ ├── scrapers/
-│ │ └── scholarships_com.py # Web scraper for Scholarships.com
-│ ├── requirements.txt # Python dependencies
-│ ├── .env.example # Example backend environment variables
-│ └── Dockerfile # Backend Docker configuration
-├── frontend/
-│ ├── public/ # React public assets
-│ ├── src/
-│ │ ├── components/ # React components
-│ │ ├── App.js # Main React app
-│ │ └── index.js # React entrypoint
-│ ├── package.json # Node.js dependencies and scripts
-│ ├── .env.example # Example frontend environment variables
-│ └── Dockerfile # Frontend Docker configuration
-├── compose.yaml # Docker Compose orchestration file
-├── README.md # Project documentation
-└── .gitignore # Git ignore rules
+scholarship-finder/   
+├── backend/   
+│ ├── src/  
+│ │ ├── dal.py # Data access layer and DB logic  
+│ │ ├── recommendation.py # Matching algorithm logic  
+│ │ └── server.py # FastAPI application entrypoint  
+│ ├── scrapers/  
+│ │ └── scholarships_com.py # Web scraper for Scholarships.com  
+│ ├── requirements.txt # Python dependencies  
+│ ├── .env.example # Example backend environment variables  
+│ └── Dockerfile # Backend Docker configuration  
+├── frontend/  
+│ ├── public/ # React public assets  
+│ ├── src/  
+│ │ ├── components/ # React components  
+│ │ ├── App.js # Main React app  
+│ │ └── index.js # React entrypoint  
+│ ├── package.json # Node.js dependencies and scripts  
+│ ├── .env.example # Example frontend environment variables  
+│ └── Dockerfile # Frontend Docker configuration  
+├── compose.yaml # Docker Compose orchestration file  
+├── README.md # Project documentation  
+└── .gitignore # Git ignore rules  
 
 
 ### Explanation
