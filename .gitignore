@@ -1,0 +1,28 @@
+# Environment files (contains sensitive data)
+backend/.env
+frontend/.env
+
+# Docker volumes and cache
+node_modules/
+__pycache__/
+*.pyc
+.dockerignore
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependency directories that can be rebuilt
+frontend/node_modules/
+backend/src/__pycache__/
+backend/venv
