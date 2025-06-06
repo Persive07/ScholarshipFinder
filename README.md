@@ -88,7 +88,7 @@ ScholarshipFinder/
 
 1. **Clone the repository**
 
-git clone https://github.com/Persive07/ScholarshipFindergit  
+git clone https://github.com/Persive07/ScholarshipFinder.git  
 cd ScholarshipFinder
 
 2. **Create environment files**
