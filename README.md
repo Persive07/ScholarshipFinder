@@ -65,10 +65,13 @@ ScholarshipFinder/
 │ ├── src/  
 │ │ ├── dal.py                
 │ │ ├── recommendation.py     # Matching algorithm logic  
-│ │ └── server.py              
-│ ├── scrapers/    
+│ │ └── server.py  
+| |  
+│ ├── scrapers/ 
+| |  
 ├── frontend/  
-│ ├── React App    
+│ ├── React App  
+| |  
 ├── compose.yaml              # Docker Compose orchestration file   
 
 ---
