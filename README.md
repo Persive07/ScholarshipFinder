@@ -100,7 +100,7 @@ DATABASE_NAME=your_database_name
 
 ( Or you could user our cluster for already scrapped data, but with very minimal database access )
 
-MONGODB_URI=mongodb+srv://developer:developer@cluster0.so1qg5r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+MONGODB_URI=mongodb+srv://developer:developer@cluster0.so1qg5r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0  
 DATABASE_NAME=scholarship_db
 
 Create `frontend/.env`:
