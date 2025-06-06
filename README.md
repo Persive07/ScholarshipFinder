@@ -67,7 +67,7 @@ ScholarshipFinder/
 │ │ ├── recommendation.py     # Matching algorithm logic  
 │ │ └── server.py  
 | |  
-│ ├── scrapers/ 
+│ ├── scrapers/   
 | |  
 ├── frontend/  
 │ ├── React App  
@@ -89,19 +89,23 @@ cd ScholarshipFinder
 
 Create `backend/.env`:
 
-MONGODB_URI= 
+MONGODB_URI=   
 DATABASE_NAME=
 
 ( Or you could user our cluster for already scrapped data, but with very minimal database access )
 
 Create `frontend/.env`:
 
-REACT_APP_API_URL=http://localhost:8000
+REACT_APP_API_URL=  
+
+> **Note:** .env files corresponding to our deployment have already been provided in the repository.
 
 3. **Build and start the application**
 
 docker compose build  
 docker compose up -d
+
+> **Note:** Make sure Docker Desktop is running on ur pc.
 
 4. **Access the application**
 - Frontend: [http://localhost:3000](http://localhost:3000)
