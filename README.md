@@ -63,22 +63,16 @@ Visit our deployed application:  [https://scholarshipfinderfrontend.onrender.com
 ScholarshipFinder/   
 ├── backend/   
 │ ├── src/  
-│ │ ├── dal.py                # Data access layer and DB logic  
+│ │ ├── dal.py                
 │ │ ├── recommendation.py     # Matching algorithm logic  
 │ │ └── server.py              
 │ ├── scrapers/  
-│ │ └── scholarships.py   
-│ ├── requirements.txt    
+│ │ └── scholarships.py    
 │ └── Dockerfile   
 ├── frontend/  
-│ ├── src/  
-│ │ ├── pages/                # React components  
-│ │ ├── App.js   
-│ ├── package.json   
+│ ├── React App 
 │ └── Dockerfile  
-├── compose.yaml              # Docker Compose orchestration file  
-├── README.md  
-└── .gitignore  
+├── compose.yaml              # Docker Compose orchestration file   
 
 ---
 
@@ -91,7 +85,7 @@ ScholarshipFinder/
 git clone https://github.com/Persive07/ScholarshipFinder.git  
 cd ScholarshipFinder
 
-2. **Create environment files**
+2. **( Optional: Not required when using our database ) Environment Variables**
 
 Create `backend/.env`:
 
