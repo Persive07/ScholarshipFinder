@@ -64,20 +64,20 @@ Visit our application:  [https://scholarshipfinderfrontend.onrender.com](https:/
 scholarship-finder/   
 ├── backend/   
 │ ├── src/  
-│ │ ├── dal.py # Data access layer and DB logic  
-│ │ ├── recommendation.py # Matching algorithm logic  
-│ │ └── server.py # FastAPI application entrypoint  
+│ │ ├── dal.py                # Data access layer and DB logic  
+│ │ ├── recommendation.py     # Matching algorithm logic  
+│ │ └── server.py              
 │ ├── scrapers/  
-│ │ └── scholarships_com.py # Web scraper for Scholarships.com  
-│ ├── requirements.txt # Python dependencies    
-│ └── Dockerfile # Backend Docker configuration  
+│ │ └── scholarships_com.py 
+│ ├── requirements.txt    
+│ └── Dockerfile   
 ├── frontend/  
 │ ├── src/  
-│ │ ├── pages/ # React components  
-│ │ ├── App.js # Main React app   
-│ ├── package.json # Node.js dependencies and scripts   
-│ └── Dockerfile # Frontend Docker configuration  
-├── compose.yaml # Docker Compose orchestration file  
+│ │ ├── pages/                # React components  
+│ │ ├── App.js   
+│ ├── package.json   
+│ └── Dockerfile  
+├── compose.yaml              # Docker Compose orchestration file  
 ├── README.md  
 └── .gitignore  
 
